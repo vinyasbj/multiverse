@@ -1,14 +1,48 @@
 import React from 'react';
-import './App.css';
+import Image from './components/image'
+// import './App.css';
 import './assets/css/main.css';
 import axios from 'axios';
+import { parseString } from 'xml2js';
+import ImageModal from './components/ImageModal';
 class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      images: []
+      testing: true,
+      images: [],
+      showContactPanel: false,
+      showImageModal: false,
+      imageToShow: 0
     }
   }
+
+  toggleContactPanel() {
+    this.setState({ showContactPanel: !this.state.showContactPanel });
+  }
+
+  closeContactPanel() {
+    this.setState({ showContactPanel: false });
+  }
+
+  // clicking on an image should ensure the contact panel is closed
+  imageClicked(index) {
+    if (this.state.showContactPanel) {
+      this.toggleContactPanel();
+    }
+    else {
+      this.setState({
+        showImageModal: !this.state.showImageModal,
+        imageToShow: index
+      });
+      console.log(this.state.showImageModal);
+    }
+  }
+
+  closeImageModal() {
+    this.setState({ showImageModal: false });
+  }
+
   componentWillMount() {
     axios.get(`https://pixabay.com/api/?key=14471226-1404c6f1117ad2fdad8fc6199&q=yellow+flowers&image_type=photo&pretty=true`)
     .then((response)=>{
@@ -33,61 +67,35 @@ class App extends React.Component {
         </nav>
       </header>
     <div id="main">
-    {this.state.images.map(image => {
+    {/* {this.state.images.map((image ,index)=> {
         return <article className="thumb">
         <a href={image.largeImageURL} className="image"><img src={image.webformatURL} alt="" /></a>
         <h2>Magna feugiat lorem</h2>
         <p>Nunc blandit nisi ligula magna sodales lectus elementum non. Integer id venenatis velit.</p>
       </article>
-    })}
-    </div>
+    })} */}
+    {/* {this.state.images.map((image ,index) => {
+    <Image key={index} src={image.largeImageURL} source_url={image.webformatURL} duration={index} test={false} onClick={this.imageClicked.bind(this, index)} blur={this.state.showImageModal} />})} */}
 
-    <footer id="footer" className="panel">
-      <div className="inner split">
-        <div>
-          <section>
-            <h2>Magna feugiat sed adipiscing</h2>
-            <p>Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum eget quis orci mattis aliquet. Maecenas fringilla et ante at lorem et ipsum. Dolor nulla eu bibendum sapien. Donec non pharetra dui. Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum.</p>
-          </section>
-          <section>
-            <h2>Follow me on ...</h2>
-            <ul className="icons">
-              {/* <li><a href="" className="icon fa-twitter"><span className="label">Twitter</span></a></li>
-              <li><a href="" className="icon fa-facebook"><span className="label">Facebook</span></a></li>
-              <li><a href="" className="icon fa-instagram"><span className="label">Instagram</span></a></li>
-              <li><a href="" className="icon fa-github"><span className="label">GitHub</span></a></li>
-              <li><a href="" className="icon fa-dribbble"><span className="label">Dribbble</span></a></li>
-              <li><a href="" className="icon fa-linkedin"><span className="label">LinkedIn</span></a></li> */}
-            </ul>
-          </section>
-          <p className="copyright">
-            &copy; Unttled. Design: <a href="http://html5up.net">HTML5 UP</a>.
-          </p>
-        </div>
-        <div>
-          <section>
-            <h2>Get in touch</h2>
-            <form method="post" action="">
-              <div className="fields">
-                <div className="field half">
-                  <input type="text" name="name" id="name" placeholder="Name" />
-                </div>
-                <div className="field half">
-                  <input type="text" name="email" id="email" placeholder="Email" />
-                </div>
-                <div className="field">
-                  <textarea name="message" id="message" rows="4" placeholder="Message"></textarea>
-                </div>
-              </div>
-              <ul className="actions">
-                <li><input type="submit" value="Send" className="primary" /></li>
-                <li><input type="reset" value="Reset" /></li>
-              </ul>
-            </form>
-          </section>
-        </div>
-      </div>
-    </footer>
+    {
+            this.state.images.map((image, index) => (
+              <Image
+                key={index}
+                src={image.largeImageURL}
+                source_url={image.largeImageURL}
+                duration={index}
+                test={false}
+                onClick={this.imageClicked.bind(this, index)}
+                blur={this.state.showImageModal}
+              />
+            ))
+          }
+    </div>
+    <ImageModal
+          show={this.state.showImageModal}
+          imageToShow={this.state.imageToShow}
+          images={this.state.images}
+          closeCallback={this.closeImageModal.bind(this)} />
 </div>
   );
   }
