@@ -5,6 +5,7 @@ import './assets/css/main.css';
 import axios from 'axios';
 import { parseString } from 'xml2js';
 import ImageModal from './components/ImageModal';
+// import NewImageModal from './components/newImageModal';
 class App extends React.Component {
   constructor(props){
     super(props)

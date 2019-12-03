@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import  {spring,Motion }from 'react-motion';
-// import  spring from 'react-motion';
 import Img from 'react-image';
 import Loader from 'react-loader';
 import MdChevronRight from 'react-icons/md/index';
@@ -132,8 +131,6 @@ class ImageModal extends React.Component {
     }
 
     render() {
-
-
         return ( 
             <div>
             <Motion

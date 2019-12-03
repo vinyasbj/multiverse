@@ -1,16 +1,11 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
+// import { render } from "react-dom";
 import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
+// import "react-image-lightbox/style.css";
 import axios from "axios";
-const images = [
-  "//placekitten.com/1500/500",
-  "//placekitten.com/4000/3000",
-  "//placekitten.com/800/1200",
-  "//placekitten.com/1500/1500"
-];
+import Carousel from 'react-images';
 
-class App extends Component {
+class NewImageModal extends Component {
   constructor(props) {
     super(props);
 
@@ -20,31 +15,31 @@ class App extends Component {
       images: []
     };
   }
-
-  componentWillMount() {
-    axios
-      .get(
-        `https://pixabay.com/api/?key=14471226-1404c6f1117ad2fdad8fc6199&q=yellow+flowers&image_type=photo&pretty=true`
-      )
-      .then(response => {
-        console.log(response);
-        this.setState({ images: response.data.hits });
-        // console.log(this.state.images);
-      })
-      .catch(function(error) {
-        // console.log(`${api.tickets.baseUrl}/collections`);
-        console.log(error);
-      });
-  }
+  componentWillReceiveProps(nextProps) {
+    // console.log(nextProps)
+    this.setState({
+        images: nextProps.images,
+        imageToShow: nextProps.imageToShow,
+        nextImageToShow: undefined,
+        show: nextProps.show,
+        pictureShown: nextProps.show
+    });
+    // debugger
+}
+  // componentWillMount() {
+  //   // debugger
+  //   console.log('====================================')
+  //   console.log(this.props)
+  //   console.log('====================================')
+  // }
   render() {
     const { photoIndex, isOpen } = this.state;
 
     return (
       <div>
-        <button type="button" onClick={() => this.setState({ isOpen: true })}>
+        {/* <button type="button" onClick={() => this.setState({ isOpen: true })}>
           Open Lightbox
-        </button>
-
+        </button> */}
         {isOpen && (
           <Lightbox
             mainSrc={this.state.images[photoIndex].largeImageURL}
@@ -78,4 +73,4 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById("root"));
+export default NewImageModal;
