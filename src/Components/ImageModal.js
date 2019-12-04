@@ -214,11 +214,11 @@ class ImageModal extends Component {
                                 <h2
                                     style={{
                                         fontFamily: "'Open Sans', sans-serif"
-                                    }}>Lorem Ipsum - Open Sans</h2>
+                                    }}></h2>
                                 <p style={{
                                     margin: '0em 0em .5em 0em',
                                     fontFamily: "'Roboto', sans-serif"
-                                }}>Roboto: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..</p>
+                                }}></p>
                             </div>
                             <div id='controls'
                                 style={{
