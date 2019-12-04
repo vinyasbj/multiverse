@@ -44,11 +44,11 @@ class App extends Component {
   }
 
   componentWillMount() {
-    axios.get(`https://pixabay.com/api/?key=14471226-1404c6f1117ad2fdad8fc6199&q=yellow+flowers&image_type=photo&pretty=true`)
+    axios.get(`https://google-photos-album-demo.glitch.me/rqNed2Rx9UrSfGZx5`)
     .then((response)=>{
         console.log(response);
-        this.setState({images: response.data.hits})
-        // console.log(this.state.images);
+        this.setState({images: response.data})
+        console.log(this.state.images);
     })
     .catch(function (error) {
         // console.log(`${api.tickets.baseUrl}/collections`);
@@ -78,8 +78,8 @@ class App extends Component {
             this.state.images.map((image, index) => (
               <ImageItem
                 key={index}
-                src={image.largeImageURL}
-                source_url={image.largeImageURL}
+                src={image}
+                source_url={image}
                 duration={index}
                 test={false}
                 onClick={this.imageClicked.bind(this, index)}
