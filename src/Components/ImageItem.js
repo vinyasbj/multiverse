@@ -43,7 +43,7 @@ class ImageItem extends Component {
                         style={{
                             fontFamily: "'Roboto', sans-serif"
                         }}>
-                        {this.props.source_url}</h2>
+                        {}</h2>
                     </article>
                 }
             </Motion>
