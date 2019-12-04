@@ -117,7 +117,7 @@ class Footer extends Component {
                             <div>
                                 <section>
                                     <h2>Get in touch</h2>
-                                    <form method="post" action="#">
+                                    <form method="post" action="#" netlify >
                                         <div className="field half first">
                                             <input type="text" name="name" id="name" placeholder="Name" />
                                         </div>
