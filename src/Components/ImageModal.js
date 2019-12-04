@@ -175,7 +175,7 @@ class ImageModal extends Component {
                                 minHeight: '33%',
                                 boxShadow: `0px 0px 5px 1px rgba(0,0, 10, 7, .75) inset`,
                                 backgroundImage: `url(${this.state.imageToShow !== undefined ?
-                                    this.state.images[this.state.imageToShow].largeImageURL :
+                                    this.state.images[this.state.imageToShow] :
                                     `images/fulls/01.jpg`})`,
                                 backgroundSize: 'cover',
                             }}>
@@ -195,7 +195,7 @@ class ImageModal extends Component {
                                 }}
                                 src={
                                     this.state.imageToShow !== undefined ?
-                                        this.state.images[this.state.imageToShow].largeImageURL :
+                                        this.state.images[this.state.imageToShow] :
                                         null
                                 }
                                 loader={<Loader />}
